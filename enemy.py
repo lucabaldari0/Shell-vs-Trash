@@ -5,8 +5,8 @@ from settings import SCREEN_W, SCREEN_H, ENEMY_TYPES, POWERUP_DROP_RATES, ENEMY_
 
 ANIM_SPEED = {
     "red":    16,
-    "orange": 30,
-    "purple": 18,
+    "orange": 20,
+    "purple": 12,
     "yellow": 12,
 }
 
@@ -15,7 +15,7 @@ ENEMY_SHEETS = {
     "red":    os.path.join("assets", "red_spritesheet.png"),
     "orange": os.path.join("assets", "orange_spritesheet.png"),
     "purple": os.path.join("assets", "purple_spritesheet.png"),
-    "yellow": None,
+    "yellow": os.path.join("assets", "yellow_spritesheet.png"),
 }
 ENEMY_FRAME_COUNT = 4
 ENEMY_FRAME_SIZE  = 40   # usato solo per red, gli altri vengono divisi in 4 parti uguali
