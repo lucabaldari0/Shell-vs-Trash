@@ -20,7 +20,7 @@ You play as a sea turtle fighting ocean pollution — dodge and shoot through wa
 ## Installation
 
 ```bash
-git clone https://github.com/lucabaldari0/shell-vs-trash.git
+git clone https://github.com/lucabaldari0/Shell-vs-Trash.git
 cd giochinox
 pip install -r requirements.txt
 python main.py
