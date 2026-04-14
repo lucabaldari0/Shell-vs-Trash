@@ -289,20 +289,24 @@ def run_game(screen, clock):
 
             # Sparo automatico
             if player.can_shoot():
-                for b in player.shoot():
+               for b in player.shoot():
                     bullets.add(b)
+               bubble_sound.play()
             bullets.update()
 
             # Power-up raccolti
             for pu in pygame.sprite.spritecollide(player, powerups, True):
                 if pu.kind == "shield":
                     player.activate_shield()
+                    powerup_sound.play()
                     spawn_particles(particles, player.rect.centerx, player.rect.centery, (80, 255, 160), 12)
                 elif pu.kind == "doubleshoot":
                     player.activate_doubleshoot()
+                    powerup_sound.play()
                     spawn_particles(particles, player.rect.centerx, player.rect.centery, (80, 200, 255), 12)
                 elif pu.kind == "life":
                     lives = min(lives + 1, 3)
+                    powerup_sound.play()
                     spawn_particles(particles, player.rect.centerx, player.rect.centery, (255, 80, 80), 12)
 
             # --- BOSS (solo stage 1) ---
@@ -331,6 +335,7 @@ def run_game(screen, clock):
                             killed = boss.hit()
                             spawn_particles(particles, boss.rect.centerx, boss.rect.centery, (210, 120, 255), 5)
                             if killed:
+                                boss_explosion_sound.play()
                                 score += 200
                                 spawn_particles(particles, boss.rect.centerx, boss.rect.centery, (255, 200, 80), 30)
 
@@ -338,6 +343,7 @@ def run_game(screen, clock):
                         if player.absorb_hit():
                             spawn_particles(particles, player.rect.centerx, player.rect.centery, (80, 255, 160), 16)
                         else:
+                            damage_sound.play()
                             lives -= 1
                             flash_timer = FLASH_DURATION
                             invincible  = INVINCIBLE_FRAMES
@@ -395,6 +401,7 @@ def run_game(screen, clock):
                     if player.absorb_hit():
                         spawn_particles(particles, player.rect.centerx, player.rect.centery, (80, 255, 160), 16)
                     else:
+                        damage_sound.play()
                         lives -= 1
                         flash_timer = FLASH_DURATION
                         invincible  = INVINCIBLE_FRAMES
@@ -408,6 +415,7 @@ def run_game(screen, clock):
                     if player.absorb_hit():
                         spawn_particles(particles, player.rect.centerx, player.rect.centery, (80, 255, 160), 16)
                     else:
+                        damage_sound.play()
                         lives -= 1
                         flash_timer = FLASH_DURATION
                         invincible  = INVINCIBLE_FRAMES
@@ -470,6 +478,7 @@ def run_game(screen, clock):
                     if player.absorb_hit():
                         spawn_particles(particles, player.rect.centerx, player.rect.centery, (80, 255, 160), 16)
                     else:
+                        damage_sound.play()
                         lives -= 1
                         flash_timer = FLASH_DURATION
                         invincible  = INVINCIBLE_FRAMES
@@ -484,6 +493,7 @@ def run_game(screen, clock):
                     if player.absorb_hit():
                         spawn_particles(particles, player.rect.centerx, player.rect.centery, (80, 255, 160), 16)
                     else:
+                        damage_sound.play()
                         lives -= 1
                         flash_timer = FLASH_DURATION
                         invincible  = INVINCIBLE_FRAMES
@@ -546,6 +556,7 @@ def run_game(screen, clock):
                         color = enemy.color if killed else enemy.color_lt
                         spawn_particles(particles, enemy.rect.centerx, enemy.rect.centery, color, 10 if killed else 4)
                         if killed:
+                            explosion_sound.play()
                             score += enemy.points
                             drop = enemy.get_drop()
                             if drop:
@@ -559,6 +570,7 @@ def run_game(screen, clock):
                 if player.absorb_hit():
                     spawn_particles(particles, player.rect.centerx, player.rect.centery, (80, 255, 160), 16)
                 else:
+                    damage_sound.play()
                     lives -= 1
                     flash_timer = FLASH_DURATION
                     invincible  = INVINCIBLE_FRAMES
@@ -574,6 +586,7 @@ def run_game(screen, clock):
                 if player.absorb_hit():
                     spawn_particles(particles, player.rect.centerx, player.rect.centery, (80, 255, 160), 16)
                 else:
+                    damage_sound.play()
                     lives -= 1
                     flash_timer = FLASH_DURATION
                     invincible  = INVINCIBLE_FRAMES
@@ -677,6 +690,21 @@ def run_game(screen, clock):
 
 if __name__ == "__main__":
     pygame.init()
+    pygame.mixer.init()
+    pygame.mixer.music.load("assets/Pacific Ocean.mp3")
+    pygame.mixer.music.set_volume(0.05)
+    pygame.mixer.music.play(-1)
+    bubble_sound = pygame.mixer.Sound("assets/bubbles-single1.wav")
+    bubble_sound.set_volume(0.6)
+    explosion_sound = pygame.mixer.Sound("assets/explosion.wav")
+    explosion_sound.set_volume(0.1)
+    boss_explosion_sound = pygame.mixer.Sound("assets/Chunky Explosion.mp3")
+    boss_explosion_sound.set_volume(0.2)
+    boss_explosion_sound.play()
+    damage_sound = pygame.mixer.Sound("assets/damage_taken.mp3")
+    damage_sound.set_volume(0.6)
+    powerup_sound = pygame.mixer.Sound("assets/power_up_sound_v1.ogg")
+    powerup_sound.set_volume(0.4)   
     screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
     pygame.display.set_caption(TITLE)
     clock = pygame.time.Clock()
