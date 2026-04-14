@@ -35,4 +35,4 @@ python main.py
 
 Made by Luca Baldari.
 
-Built entirely with Pygame. Sprites AI generated, because I'm a developer, not an artist.
+Built entirely with Pygame. Sprites AI-generated and some still missing, because I'm a developer, not an artist. This is version 1.0, more content coming (MAYBE).
