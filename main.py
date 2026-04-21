@@ -678,6 +678,9 @@ if __name__ == "__main__":
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_W, SCREEN_H))
     pygame.display.set_caption(TITLE)
+    icon = pygame.image.load("assets/turtle_spritesheet.png")
+    icon = icon.subsurface((0, 0, 64, 64))
+    pygame.display.set_icon(icon)
     clock = pygame.time.Clock()
     init_fonts()
     from hud import font_big, font_med, font_small
